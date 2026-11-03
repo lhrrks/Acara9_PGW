@@ -1,50 +1,53 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Input Data Hidran Kering</title>
+</head>
 <body>
-    <h2>Form Input</h2>
-    <form action="input.php" onsubmit="return validateForm()" method="post">
-        <label for="kecamatan">Kecamatan:</label><br>
-        <input type="text" id="kec" name="kecamatan" value=""><br>
+    <h2>Form Tambah Data Hidran Kering</h2>
+    
+    <form action="input.php" method="post" onsubmit="return validateForm()">
+        <label for="ogc_fid">OGC FID:</label><br>
+        <input type="number" id="ogc_fid" name="ogc_fid" required><br><br>
+
+        <label for="no">No:</label><br>
+        <input type="number" id="no" name="no" required><br><br>
+
+        <label for="nama_kode">Nama Kode:</label><br>
+        <input type="text" id="nama_kode" name="nama_kode" required><br><br>
+
+        <label for="alamat">Alamat:</label><br>
+        <input type="text" id="alamat" name="alamat" required><br><br>
+
+        <label for="status">Status:</label><br>
+        <input type="text" id="status" name="status" value="Berfungsi" required><br><br>
 
         <label for="longitude">Longitude:</label><br>
-        <input type="text" id="long" name="longitude" value=""><br>
+        <input type="text" id="long" name="longitude" required><br><br>
 
         <label for="latitude">Latitude:</label><br>
-        <input type="text" id="lat" name="latitude" value=""><br>
+        <input type="text" id="lat" name="latitude" required><br><br>
 
-        <label for="luas">Luas:</label><br>
-        <input type="text" id="luas" name="luas" value=""><br>
-
-        <label for="jumlah_penduduk">Jumlah Penduduk:</label><br>
-        <input type="text" id="jml_ppdk" name="jumlah_penduduk" value=""><br><br>
-
-        <input type="submit" value="Submit">
+        <input type="submit" value="Simpan Data">
+        <a href="../index.php"><button type="button">Batal</button></a>
     </form>
-    <p id="informasi" style="color:red;"></p>
+
+    <p id="informasi" style="color: red;"></p>
 
     <script>
-        function validateForm() {
-            let kecamatan = document.getElementById("kec").value;
-            let luas = document.getElementById("luas").value;
-            let jml_ppdk = document.getElementById("jml_ppdk").value;
-            let text = "";
+    function validateForm() {
+        let long = document.getElementById("long").value;
+        let lat = document.getElementById("lat").value;
+        let text = "";
 
-            if (kecamatan.trim() === "") {
-                text = "Data kecamatan tidak boleh kosong.";
-            } else if (isNaN(luas) || luas < 1) {
-                text = "Data luas harus angka dan tidak boleh bernilai negatif.";
-            } else if (isNaN(jml_ppdk) || jml_ppdk < 1) {
-                text = "Data jumlah penduduk harus angka dan tidak boleh bernilai negatif.";
-            }
-
-            if (text !== "") {
-                document.getElementById("informasi").innerHTML = text;
-                event.preventDefault();
-                return false;
-            }
+        if (isNaN(long) || isNaN(lat)) {
+            text = "Koordinat (Longitude & Latitude) harus berupa angka!";
+            document.getElementById("informasi").innerHTML = text;
+            return false;
         }
+        return true;
+    }
     </script>
 </body>
-
 </html>
